@@ -10,8 +10,6 @@ To install CSVExport, you just need to download the main PHP class _CSVExport.ph
 require_once "path/to/CSVExport.php";
 ```
 
-Now you are ready to rock !
-
 
 ## Using CSVExport
 
@@ -71,7 +69,7 @@ Your CSV file is now generated and ready to download !
 
 #### Optional parameters
 
-Several optional parameters are available, if you are a tricky one. Here they are :
+Several optional parameters are available, if you need them. Here they are :
 
 * **delimiter** _(string, default : ";")_ - Allows you to change the delimiter between the values in the file.
 * **keys** _(array, default : array())_ - Allows you to change the key names to bind to the first line of the file.
