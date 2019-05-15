@@ -189,7 +189,7 @@ class CSVExport
      * @param bool $enclose (Optional) Specifies if all values should be enclosed by double quotes.
      * @param string $charset (Optional) The charset of the output file.
      */
-    function generate($filename,$data,$delimiter = ";",$keys = array(),$output_stream = true,$enclose = false,$charset = 'utf-8')
+    function generate($filename,$data,$delimiter = ";",$keys = array(),$output_stream = true,$enclose = false,$charset = 'UTF-8')
     {
         $this->genBlankArray($data);
 
@@ -202,8 +202,10 @@ class CSVExport
         if($output_stream)
         {
             // CSV headers
+            header('Content-Encoding: '.$charset);
             header('Content-Type: text/csv; charset='.$charset);
             header('Content-Disposition: attachment; filename='.$file);
+            header("Content-Transfer-Encoding: binary");
 
             $output = fopen('php://output', 'w');
         }
@@ -211,6 +213,11 @@ class CSVExport
         else
         {
             $output = fopen($file, 'w');
+        }
+
+        if($charset === "UTF-8")
+        {
+            fputs($output,"\xEF\xBB\xBF"); // UTF-8 BOM
         }
 
         if(!empty($lines) && is_array($lines[0]))
